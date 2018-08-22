@@ -1,14 +1,14 @@
 def make_bag_frag(p, v, w):
-    #Definir atributo dos itens
+    #-----------------------------------Definir atributo dos itens-----------------------------------------------------
     #Peso
     p = p
     #valor
     v = v
     #densidade
     d = [] #aqui o programa define mais na frente (não mexer)
-    #-------------------------
+    #------------------------------------------------------------------------------------------------------------------
 
-    #Definir os atributos da mochila
+    #---------------------------------Definir os atributos da mochila--------------------------------------------------
     #Peso máximo
     p_maximo = w #Definir aqui o peso da mochila
     #peso ocupado
@@ -25,15 +25,16 @@ def make_bag_frag(p, v, w):
     v_frac = 0
     #variavel de checagem
     check = 0
-    #-------------------------------
+    #------------------------------------------------------------------------------------------------------------------
 
-    #calcular a densidade dos itens
+    #-------------------------------------calcular a "densidade" dos itens---------------------------------------------
     n = len(p)
     for i in range(0, n, 1):
         d.append(v[i]/p[i])
-    d.sort(reverse = 1)
-    #------------------------------
-    #organiza os itens com suas respectivas densidades em ordem decrescente
+    d.sort(reverse = 1) #organiza em ordem decrescente os itens da lista
+    #------------------------------------------------------------------------------------------------------------------
+
+    #-----------------------------organiza os itens com suas respectivas "densidades" ---------------------------------
     for i in range(0, n, 1):
         pivot = d[i]
         for j in range(0, n, 1):
@@ -45,9 +46,9 @@ def make_bag_frag(p, v, w):
                 v[j] = pivot_v
                 p[j] = pivot_p
                 break
-    #---------------------------------------------------------------------
+    #------------------------------------------------------------------------------------------------------------------
 
-    #organiza a mochila
+    #-------------------------------------------organiza a mochila-----------------------------------------------------
     for i in range(0, n, 1):
         check += p[i]
         if check <= p_maximo:
@@ -63,6 +64,7 @@ def make_bag_frag(p, v, w):
             inside_valor.append(v_frac)
             p_ocupado += p_frac
             v_ocupado += v_frac
+    #------------------------------------------------------------------------------------------------------------------
 
     print('peso dos itens', inside_peso)
     print('valor dos itens', inside_valor)
