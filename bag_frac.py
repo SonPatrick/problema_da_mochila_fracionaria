@@ -58,7 +58,6 @@ def make_bag_frag(pv, w):
             inside_valor.append(v_frac)
             p_ocupado += p_frac
             v_ocupado += v_frac
-            break
     # ------------------------------------------------------------------------------------------------------------------
 
     print('peso dos itens', inside_peso)
