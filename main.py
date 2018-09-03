@@ -1,7 +1,8 @@
 from bag_frac import make_bag_frag
-
-p = [6, 10, 3, 5, 1, 3]
-v = [6, 2, 1, 8, 3, 5]
 w = 16
 
-make_bag_frag(p, v, w)
+with open('100_item.txt','r') as f:
+    items = [i.replace('\n','').replace('(','').replace(')','') for i in f.readlines()]
+    pv = [tuple(map(float, i.split(','))) for i in items]
+
+    make_bag_frag(pv, w)
