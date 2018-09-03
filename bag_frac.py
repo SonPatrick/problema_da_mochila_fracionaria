@@ -1,70 +1,65 @@
-def make_bag_frag(p, v, w):
-    #-----------------------------------Definir atributo dos itens-----------------------------------------------------
-    #Peso
-    p = p
-    #valor
-    v = v
-    #densidade
-    d = [] #aqui o programa define mais na frente (não mexer)
-    #------------------------------------------------------------------------------------------------------------------
+def ordena(pv):
 
-    #---------------------------------Definir os atributos da mochila--------------------------------------------------
-    #Peso máximo
-    p_maximo = w #Definir aqui o peso da mochila
-    #peso ocupado
+    pvd = []
+
+    for i in pv:
+        p, v = i
+        pvd.append((p, v, v/p))
+
+    pvd.sort(key=lambda tup: tup[2], reverse=1)
+
+    return pvd
+
+
+def make_bag_frag(pv, w):
+    # -----------------------------------Definir atributo dos itens-----------------------------------------------------
+    # Peso
+    pvd = ordena(pv)
+    # valor
+
+    # densidade
+    # aqui o programa define mais na frente (não mexer)
+    # ------------------------------------------------------------------------------------------------------------------
+
+    # ---------------------------------Definir os atributos da mochila--------------------------------------------------
+    # Peso máximo
+    p_maximo = w  # Definir aqui o peso da mochila
+    # peso ocupado
     p_ocupado = 0
-    #valor guardado
+    # valor guardado
     v_ocupado = 0
-    #peso do item guardado
+    # peso do item guardado
     inside_peso = []
-    #valor do item guardado
+    # valor do item guardado
     inside_valor = []
-    #peso necessário para atingir o peso máximo da mochila
+    # peso necessário para atingir o peso máximo da mochila
     p_frac = 0
-    #valor de item fracionado
+    # valor de item fracionado
     v_frac = 0
-    #variavel de checagem
+    # variavel de checagem
     check = 0
-    #------------------------------------------------------------------------------------------------------------------
-
-    #-------------------------------------calcular a "densidade" dos itens---------------------------------------------
-    n = len(p)
-    for i in range(0, n, 1):
-        d.append(v[i]/p[i])
-    d.sort(reverse = 1) #organiza em ordem decrescente os itens da lista
-    #------------------------------------------------------------------------------------------------------------------
-
-    #-----------------------------organiza os itens com suas respectivas "densidades" ---------------------------------
-    for i in range(0, n, 1):
-        pivot = d[i]
-        for j in range(0, n, 1):
-            if pivot == v[j]/p[j]:
-                pivot_v = v[i]
-                pivot_p = p[i]
-                v[i] = v[j]
-                p[i] = p[j]
-                v[j] = pivot_v
-                p[j] = pivot_p
-                break
-    #------------------------------------------------------------------------------------------------------------------
-
-    #-------------------------------------------organiza a mochila-----------------------------------------------------
-    for i in range(0, n, 1):
-        check += p[i]
-        if check <= p_maximo:
-            inside_peso.append(p[i])
-            inside_valor.append(v[i])
-            p_ocupado += p[i]
-            v_ocupado += v[i]
+    # -------------------------------------------organiza a mochila-----------------------------------------------------
+    for item in pvd:
+        peso, valor, densidade = item
+        check += peso
+        if check <= p_maximo:  # checa se o item + o atual da mochila não extrapolam o limite
+            inside_peso.append(peso)
+            inside_valor.append(valor)
+            p_ocupado += peso
+            v_ocupado += valor
             check = p_ocupado
-        else:
+        elif p_ocupado == p_maximo:  # checa se a mochila ja está cheia
+            break
+        else:  # vai vir pra cá quando o elemento inteiro extrapola o limite da mochila
+              # e esta ainda contém espaço, nesse caso fracionar
             p_frac = p_maximo - p_ocupado
-            v_frac = p_frac * d[i]
+            v_frac = p_frac * densidade
             inside_peso.append(p_frac)
             inside_valor.append(v_frac)
             p_ocupado += p_frac
             v_ocupado += v_frac
-    #------------------------------------------------------------------------------------------------------------------
+            break
+    # ------------------------------------------------------------------------------------------------------------------
 
     print('peso dos itens', inside_peso)
     print('valor dos itens', inside_valor)
