@@ -18,11 +18,11 @@ def make_bag_frag(pv, w):
     # valor
 
     # densidade
-    # aqui o programa define mais na frente (não mexer)
+    # aqui o programa define mais na frente (nao mexer)
     # ------------------------------------------------------------------------------------------------------------------
 
     # ---------------------------------Definir os atributos da mochila--------------------------------------------------
-    # Peso máximo
+    # Peso maximo
     p_maximo = w  # Definir aqui o peso da mochila
     # peso ocupado
     p_ocupado = 0
@@ -32,7 +32,7 @@ def make_bag_frag(pv, w):
     inside_peso = []
     # valor do item guardado
     inside_valor = []
-    # peso necessário para atingir o peso máximo da mochila
+    # peso necessario para atingir o peso maximo da mochila
     p_frac = 0
     # valor de item fracionado
     v_frac = 0
@@ -42,16 +42,16 @@ def make_bag_frag(pv, w):
     for item in pvd:
         peso, valor, densidade = item
         check += peso
-        if check <= p_maximo:  # checa se o item + o atual da mochila não extrapolam o limite
+        if check <= p_maximo:  # checa se o item + o atual da mochila nao extrapolam o limite
             inside_peso.append(peso)
             inside_valor.append(valor)
             p_ocupado += peso
             v_ocupado += valor
             check = p_ocupado
-        elif p_ocupado == p_maximo:  # checa se a mochila ja está cheia
+        elif p_ocupado == p_maximo:  # checa se a mochila ja esta cheia
             break
-        else:  # vai vir pra cá quando o elemento inteiro extrapola o limite da mochila
-              # e esta ainda contém espaço, nesse caso fracionar
+        else:  # vai vir pra ca quando o elemento inteiro extrapola o limite da mochila
+              # e esta ainda contem espaco, nesse caso fracionar
             p_frac = p_maximo - p_ocupado
             v_frac = p_frac * densidade
             inside_peso.append(p_frac)
