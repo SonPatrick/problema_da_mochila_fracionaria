@@ -1,5 +1,4 @@
 .idea/
-*.txt
 dicio.py
 .vscode/
 __pycache__/
